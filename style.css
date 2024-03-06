@@ -6,9 +6,40 @@
 }
 
 body {
+  background: #fff;
   height: 100%;
   margin: 0;
   
   display: flex;
   align-items: center;
+  overflow: hidden;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.container {
+  color: rgba(55, 59, 65, 0.8);
+  font: lighter 16px Helvetica, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  font-weight: normal;
+}
+
+li {
+  display: inline-block;
+  font-size: 24px;
+  list-style-type: none;
+  padding: 16px;
+  text-transform: uppercase;
+}
+
+li span {
+  display: block;
+  font-size: 4.5rem;
 }
