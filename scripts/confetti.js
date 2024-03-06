@@ -1,147 +1,108 @@
-window.ConfettiGenerator = function (options) {
-  // Função auxiliar para gerar números aleatórios com ou sem arredondamento
-  function random(value, floor) {
-    value = value || 1
-    var result = Math.random() * value
-    return floor ? Math.floor(result) : result
+window.ConfettiGenerator = function (e) {
+  function t(e, t) {
+    e || (e = 1)
+    var i = Math.random() * e
+    return t ? Math.floor(i) : i
   }
-
-  // Função para criar uma propriedade de confete aleatória
-  function createConfetti() {
+  function i() {
     return {
-      prop: props[random(props.length, true)],
-      x: random(width),
-      y: random(height),
-      radius: random(4) + 1,
-      line: Math.floor(random(65) - 30),
-      angles: [
-        random(10, true) + 2,
-        random(10, true) + 2,
-        random(10, true) + 2,
-        random(10, true) + 2,
-      ],
-      color: colors[random(colors.length, true)],
-      rotation: (random(360, true) * Math.PI) / 180,
-      speed: random(clock / 7) + clock / 30,
+      prop: a.props[t(a.props.length, !0)],
+      x: t(a.width),
+      y: t(a.height),
+      radius: t(4) + 1,
+      line: Math.floor(t(65) - 30),
+      angles: [t(10, !0) + 2, t(10, !0) + 2, t(10, !0) + 2, t(10, !0) + 2],
+      color: a.colors[t(a.colors.length, !0)],
+      rotation: (t(360, !0) * Math.PI) / 180,
+      speed: t(a.clock / 7) + a.clock / 30,
     }
   }
-
-  // Função para renderizar um confete no contexto 2D
-  function renderConfetti(confetti) {
-    var sizeFactor = confetti.radius <= 3 ? 0.4 : 0.8
-
-    switch (confetti.prop) {
+  function r(e) {
+    var t = e.radius <= 3 ? 0.4 : 0.8
+    switch (
+      ((n.fillStyle = n.strokeStyle = "rgba(" + e.color + ", " + t + ")"),
+      n.beginPath(),
+      e.prop)
+    ) {
       case "circle":
-        context.moveTo(confetti.x, confetti.y)
-        context.arc(
-          confetti.x,
-          confetti.y,
-          confetti.radius * size * 1.5,
-          0,
-          2 * Math.PI,
-          true
-        )
-        context.fill()
+        n.moveTo(e.x, e.y),
+          n.arc(e.x, e.y, e.radius * a.size, 0, 2 * Math.PI, !0),
+          n.fill()
         break
       case "triangle":
-        context.moveTo(confetti.x, confetti.y)
-        context.lineTo(
-          confetti.x + confetti.angles[0] * size,
-          confetti.y + confetti.angles[1] * size
-        )
-        context.lineTo(
-          confetti.x + confetti.angles[2] * size,
-          confetti.y + confetti.angles[3] * size
-        )
-        context.closePath()
-        context.fill()
+        n.moveTo(e.x, e.y),
+          n.lineTo(e.x + e.angles[0] * a.size, e.y + e.angles[1] * a.size),
+          n.lineTo(e.x + e.angles[2] * a.size, e.y + e.angles[3] * a.size),
+          n.closePath(),
+          n.fill()
         break
       case "line":
-        context.moveTo(confetti.x, confetti.y)
-        context.lineTo(
-          confetti.x + confetti.line * size,
-          confetti.y + 5 * confetti.radius
-        )
-        context.lineWidth = 2 * size
-        context.stroke()
+        n.moveTo(e.x, e.y),
+          n.lineTo(e.x + e.line * a.size, e.y + 5 * e.radius),
+          (n.lineWidth = 2 * a.size),
+          n.stroke()
         break
       case "square":
-        context.save()
-        context.translate(confetti.x + 15, confetti.y + 5)
-        context.rotate(confetti.rotation)
-        context.fillRect(-15 * size, -5 * size, 15 * size, 5 * size)
-        context.restore()
-        break
+        n.save(),
+          n.translate(e.x + 15, e.y + 5),
+          n.rotate(e.rotation),
+          n.fillRect(-15 * a.size, -5 * a.size, 15 * a.size, 5 * a.size),
+          n.restore()
     }
   }
-
-  // Configurações padrão e opções fornecidas
-  var props = ["circle", "square", "triangle", "line"]
-  var colors = [
-    [165, 104, 246],
-    [230, 61, 135],
-    [0, 199, 228],
-    [253, 214, 126],
-  ]
-  var clock = 25
-  var width = window.innerWidth
-  var height = window.innerHeight
-
-  if (options) {
-    options.target && options.target && (options.target = options.target)
-    options.max && options.max && (options.max = options.max)
-    options.size && options.size && (options.size = options.size)
-    options.animate !== undefined && options.animate !== null && (options.animate = options.animate)
-    options.props && options.props && (options.props = options.props)
-    options.colors && options.colors && (options.colors = options.colors)
-    options.clock && options.clock && (options.clock = options.clock)
-    options.width && options.width && (options.width = options.width)
-    options.height && options.height && (options.height = options.height)
+  var a = {
+    target: "confetti-holder",
+    max: 80,
+    size: 1,
+    animate: !0,
+    props: ["circle", "square", "triangle", "line"],
+    colors: [
+      [165, 104, 246],
+      [230, 61, 135],
+      [0, 199, 228],
+      [253, 214, 126],
+    ],
+    clock: 25,
+    interval: null,
+    width: window.innerWidth,
+    height: window.innerHeight,
   }
-
-  // Obtendo o elemento canvas do HTML
-  var canvas = document.getElementById(options.target)
-  var context = canvas.getContext("2d")
-  var confettis = []
-
+  e &&
+    (e.target && (a.target = e.target),
+    e.max && (a.max = e.max),
+    e.size && (a.size = e.size),
+    void 0 !== e.animate && null !== e.animate && (a.animate = e.animate),
+    e.props && (a.props = e.props),
+    e.colors && (a.colors = e.colors),
+    e.clock && (a.clock = e.clock),
+    e.width && (a.width = e.width),
+    e.height && (a.height = e.height))
+  var o = document.getElementById(a.target),
+    n = o.getContext("2d"),
+    l = []
   return {
-    // Função para renderizar confetes no canvas
     render: function () {
-      function updateConfettis() {
-        context.clearRect(0, 0, width, height)
-        for (var i in confettis) {
-          renderConfetti(confettis[i])
-          moveConfetti(i)
+      function e() {
+        n.clearRect(0, 0, a.width, a.height)
+        for (var e in l) r(l[e])
+        s()
+      }
+      function s() {
+        for (var e = 0; e < a.max; e++) {
+          var i = l[e]
+          a.animate && (i.y += i.speed),
+            i.y > a.height &&
+              ((l[e] = i), (l[e].x = t(a.width, !0)), (l[e].y = -10))
         }
       }
-
-      // Movimentar confetes para baixo
-      function moveConfetti(index) {
-        var confetti = confettis[index]
-        options.animate && (confetti.y += confetti.speed)
-        confetti.y > height &&
-          ((confettis[index] = confetti),
-          (confettis[index].x = random(width, true)),
-          (confettis[index].y = -10))
-      }
-
-      canvas.width = width
-      canvas.height = height
-      confettis = []
-      for (var i = 0; i < options.max; i++) {
-        confettis.push(createConfetti())
-      }
-      return options.animate
-        ? (options.interval = setInterval(updateConfettis, 20))
-        : updateConfettis()
+      ;(o.width = a.width), (o.height = a.height), (l = [])
+      for (var c = 0; c < a.max; c++) l.push(i())
+      return a.animate ? (a.interval = setInterval(e, 20)) : e()
     },
-    // Função para limpar confetes do canvas
     clear: function () {
-      context.clearRect(0, 0, canvas.width, canvas.height)
-      var canvasWidth = canvas.width
-      canvas.width = 1
-      canvas.width = canvasWidth
-      clearInterval(options.interval)
+      n.clearRect(0, 0, o.width, o.height)
+      var e = o.width
+      ;(o.width = 1), (o.width = e), clearInterval(a.interval)
     },
   }
 }
