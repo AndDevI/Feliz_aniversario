@@ -149,3 +149,61 @@ li span {
   height: 30px;
   background: rgba(0, 0, 0, 0);
 }
+
+.step-1 .giftbox,
+.step-1 .cover {
+  animation: wobble 0.5s linear infinite forwards;
+}
+
+.step-1 .icons .row span {
+  opacity: 1;
+}
+
+.step-2 .giftbox:after {
+  opacity: 0;
+}
+
+.step-3 .giftbox,
+.step-4 .giftbox,
+.step-3 .giftbox:after,
+.step-4 .giftbox:after {
+  opacity: 0;
+  z-index: 1;
+}
+
+.step-2 .giftbox .cover {
+  animation: flyUp 2s ease-in forwards;
+}
+
+.step-2 .giftbox .box {
+  animation: flyDown 2s ease-in 0.05s forwards;
+}
+
+@keyframes wobble {
+  25% {
+    transform: rotate(4deg);
+  }
+  75% {
+    transform: rotate(-2deg);
+  }
+}
+
+@keyframes flyUp {
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1000px) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes flyDown {
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
