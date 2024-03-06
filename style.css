@@ -84,3 +84,12 @@ li span {
   transform: rotate(-20deg);
   transform-origin: 0 0;
 }
+
+.giftbox .cover {
+  width: 100%;
+  height: 25%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
