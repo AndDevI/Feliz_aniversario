@@ -207,3 +207,19 @@ li span {
     opacity: 0;
   }
 }
+
+@media (max-width: 768px) {
+  .giftbox:after {
+    font-size: 6vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .giftbox:after {
+    font-size: 8vw;
+  }
+
+  li span {
+  font-size: 2.5rem;
+  }
+}
