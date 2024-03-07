@@ -510,9 +510,24 @@ x = setInterval(function () {
       //   setTimeout(anim, 1900);
     }
 
+    // Função para reproduzir a música de fundo
+    function playBackgroundMusic() {
+      // Obtém a referência para o elemento de áudio
+      const backgroundMusic = document.getElementById("backgroundMusic")
+
+      // Inicia a reprodução da música
+      backgroundMusic.play()
+    }
+
     function showfireworks() {
+      // Exibe o canvas
       canvasC.style.display = "initial"
+
+      // Inicia a animação
       setTimeout(anim, 1500)
+
+      // Reproduz a música
+      playBackgroundMusic()
     }
 
     init()
