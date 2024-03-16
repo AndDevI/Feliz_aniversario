@@ -6,7 +6,7 @@ const canvasC = document.getElementById("c")
 
 // Configurações iniciais
 const config = {
-  birthdate: "Mar 15, 2024",
+  birthdate: "Mar 17, 2024",
   name: "JULIA",
 }
 
