@@ -6,7 +6,7 @@ const canvasC = document.getElementById("c")
 
 // Configurações iniciais
 const config = {
-  birthdate: "Mar 17, 2024",
+  birthdate: "Mar 15, 2024",
   name: "JULIA",
 }
 
@@ -501,6 +501,7 @@ x = setInterval(function () {
       }
       stepClass(step)
       if (step === 3) {
+        document.getElementById("sendMessageButton").style.display = "block"
       }
       if (step === 4) {
         return
